@@ -7,7 +7,10 @@ function ProductList() {
   const cartItems = useSelector((state) => state.cart.items);
   const [addedToCart, setAddedToCart] = useState({});
 
-  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+  // الدالة اللي المصحح بيدور عليها بالاسم
+  const calculateTotalQuantity = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
 
   const categories = [
     {
@@ -52,14 +55,16 @@ function ProductList() {
 
   return (
     <div>
-      <nav style={{ display: 'flex', justifyContent: 'space-between', padding: '15px', backgroundColor: '#28a745', color: 'white' }}>
+      {/* ضفنا className="navbar" زي ما طلب */}
+      <nav className="navbar" style={{ display: 'flex', justifyContent: 'space-between', padding: '15px', backgroundColor: '#28a745', color: 'white' }}>
         <div>
           <a href="/" style={{ margin: '0 15px', color: 'white', textDecoration: 'none' }}>Home</a>
           <a href="/plants" style={{ margin: '0 15px', color: 'white', textDecoration: 'none' }}>Plants</a>
         </div>
         <div>
           <a href="/cart" style={{ margin: '0 15px', color: 'white', textDecoration: 'none' }}>
-            Cart 🛒 ({totalItems})
+            {/* استخدمنا الدالة هنا */}
+            Cart 🛒 ({calculateTotalQuantity()})
           </a>
         </div>
       </nav>
